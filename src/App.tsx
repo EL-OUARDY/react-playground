@@ -55,7 +55,7 @@ function App() {
 
   return (
     <>
-      <div className="container">
+      <div className="container-fluid">
         <Header expensesCount={expensesList.length} />
         <Expenses expensesList={expensesList} addExpense={addExpense} onUpdate={updateExpense} onDelete={deleteExpense} />
       </div>

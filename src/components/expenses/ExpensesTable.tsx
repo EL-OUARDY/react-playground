@@ -38,7 +38,7 @@ function ExpensesTable({ expensesList, onUpdate, onDelete }: Props) {
                             <td className="text-center" colSpan={5}>
                                 <b>Total: </b>
                                 <span className="fw-bold text-success">
-                                    ${expensesList.reduce((acc, curr) => acc + curr.amount, 0)}
+                                    ${expensesList.reduce((acc, curr) => acc + curr.amount, 0).toFixed(2)}
                                 </span>
                             </td>
                         </tr>
