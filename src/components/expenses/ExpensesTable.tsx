@@ -1,11 +1,8 @@
+import { useExpense } from "../../contexts/ExpenseContext"
 import { Expense } from "../../types"
 
-interface Props {
-    expensesList: Expense[]
-    onUpdate: (id: number, ex: Expense) => void
-    onDelete: (id: number) => void
-}
-function ExpensesTable({ expensesList, onUpdate, onDelete }: Props) {
+function ExpensesTable() {
+    const { expensesList, updateExpense, deleteExpense } = useExpense()
     return (
         <>
             <h5>Your Expenses List</h5>
@@ -29,8 +26,8 @@ function ExpensesTable({ expensesList, onUpdate, onDelete }: Props) {
                                 <td>{x.type}</td>
                                 <td>${x.amount}</td>
                                 <td>
-                                    <a onClick={() => onUpdate(x.id, x)} className="btn text-danger p-0 px-1 mx-1">Edit</a> |
-                                    <a onClick={() => onDelete(x.id)} className="btn text-danger p-0 px-1 mx-1">Remove</a>
+                                    <a onClick={() => updateExpense(x.id, x)} className="btn text-danger p-0 px-1 mx-1">Edit</a> |
+                                    <a onClick={() => deleteExpense(x.id)} className="btn text-danger p-0 px-1 mx-1">Remove</a>
                                 </td>
                             </tr>
                         ))}

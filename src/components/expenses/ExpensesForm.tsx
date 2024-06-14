@@ -2,6 +2,7 @@ import { useForm } from "react-hook-form"
 import { Expense } from "../../types"
 import { z } from "zod"
 import { zodResolver } from "@hookform/resolvers/zod"
+import { useExpense } from "../../contexts/ExpenseContext"
 
 
 const schema = z.object({
@@ -10,10 +11,9 @@ const schema = z.object({
     type: z.string().min(1, "Type is required!")
 })
 
-interface Props {
-    addExpense: (ex: Expense) => void
-}
-function ExpensesForm({ addExpense }: Props) {
+function ExpensesForm() {
+
+    const { addExpense } = useExpense()
 
     const { register,
         handleSubmit,
@@ -21,7 +21,7 @@ function ExpensesForm({ addExpense }: Props) {
         watch,
         formState: { errors }
     } = useForm<Expense>({
-        defaultValues: { id: 0, name: "", amount: "", type: "" },
+        defaultValues: { id: 0, name: "", type: "" },
         resolver: zodResolver(schema)
     })
 
