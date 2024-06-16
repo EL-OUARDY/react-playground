@@ -1,10 +1,10 @@
 import React, { ReactNode, useContext, useState } from "react"
-import { Expense } from "../types";
+import { Expense } from "../models/types";
 
 interface IExpenseContext {
   expensesList: Expense[];
   addExpense: (expense: Expense) => void;
-  updateExpense: (id: number, expense: Expense) => void;
+  updateExpense: (id: number, new_expense: Expense) => void;
   deleteExpense: (id: number) => void;
 }
 
@@ -57,12 +57,11 @@ export function ExpenseProvider({ children }: Props) {
     setExpensesList([...expensesList, expense]);
   }
 
-  function updateExpense(id: number, expense: Expense): void {
-    expense.name += " *";
+  function updateExpense(id: number, new_expense: Expense): void {
     setExpensesList(
-      expensesList.map((old_ex) => {
-        if (old_ex.id == id) return { ...old_ex, ...expense };
-        else return old_ex;
+      expensesList.map((ex) => {
+        if (ex.id == id) return { ...new_expense, id: id };
+        return ex;
       })
     );
   }

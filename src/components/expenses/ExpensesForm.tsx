@@ -1,8 +1,11 @@
 import { useForm } from "react-hook-form"
-import { Expense } from "../../types"
+import { Expense } from "../../models/types"
 import { z } from "zod"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useExpense } from "../../contexts/ExpenseContext"
+import { useNavigate, useParams } from "react-router-dom"
+import { useEffect } from "react"
+import { ROUTES } from "../../routes/routes"
 
 
 const schema = z.object({
@@ -13,7 +16,7 @@ const schema = z.object({
 
 function ExpensesForm() {
 
-    const { addExpense } = useExpense()
+    const { addExpense, updateExpense, expensesList } = useExpense()
 
     const { register,
         handleSubmit,
@@ -27,18 +30,47 @@ function ExpensesForm() {
 
     const formObj = watch()
 
-    function onSubmit(data: Expense): void {
-        addExpense(data)
-        resetForm()
-    }
+    const { id } = useParams()
 
+    const navigate = useNavigate()
+
+
+    useEffect(() => {
+        // get expense object if the form is in the edit mode
+        if (id) {
+            const expense = (expensesList.find(x => x.id === Number(id)))
+
+            if (expense)
+                reset(expense)
+            else // wrong id
+                navigate(ROUTES.notFound)
+        }
+
+    }, [id, expensesList, reset, navigate]);
+
+    function onSubmit(data: Expense): void {
+        if (!id) {
+
+            addExpense(data)
+            resetForm()
+        }
+        else {
+            updateExpense(Number(id), data)
+            navigate(ROUTES.expenses.list, { state: { msg: `Expense ${id} Has Been Updated!` } })
+
+        }
+    }
     function resetForm() {
         reset()
     }
 
     return (
         <>
-            <h5>Add New Expenses</h5>
+            <div className="mb-2">
+                {!id && <h5>Add New Expenses</h5>}
+                {id && <h5>Edit Expense With ID : {id}</h5>}
+            </div>
+
             <hr />
             <div className="row">
                 <form onSubmit={handleSubmit(onSubmit)} className="col-lg-6 col-sm-12 col-md-6 mb-3">
@@ -59,7 +91,7 @@ function ExpensesForm() {
                     </div>
                     <div className="mb-3">
                         <label htmlFor="amount" className="form-label">Amount:</label>
-                        <input {...register("amount", { valueAsNumber: true })} type="number" className="form-control" id="amount" min={1} />
+                        <input {...register("amount", { valueAsNumber: true })} type="number" step={0.01} className="form-control" id="amount" min={1} />
                         {errors.amount && (<p className="text-danger">{errors.amount.message}</p>)}
 
                     </div>
