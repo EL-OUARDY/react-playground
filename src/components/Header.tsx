@@ -16,11 +16,12 @@ function Header() {
 
                     <ul className="nav nav-pills col-12 col-md-auto mb-2 justify-content-center mb-md-0" >
                         <li>
-                            <NavLink to={"/"} className={"nav-link px-2 text-white px-3"}>Home</NavLink>
+                            <NavLink to={"/"} className={"nav-link  text-white px-3"}>Home</NavLink>
                         </li>
-                        <li><NavLink to={ROUTES.expenses.list} className={"nav-link px-2 text-white px-3"}>Expenses</NavLink></li>
-                        <li><NavLink to={ROUTES.about} className={"nav-link px-2 text-white px-3"}>About</NavLink></li>
-                        <li><NavLink to={ROUTES.contact} className={"nav-link px-2 text-white px-3"}>Contact</NavLink></li>
+                        <li><NavLink to={ROUTES.shadcn} className={"nav-link  text-white px-3"}>Shadcn</NavLink></li>
+                        <li><NavLink to={ROUTES.expenses.list} className={"nav-link  text-white px-3"}>Expenses</NavLink></li>
+                        <li><NavLink to={ROUTES.about} className={"nav-link  text-white px-3"}>About</NavLink></li>
+                        <li><NavLink to={ROUTES.contact} className={"nav-link  text-white px-3"}>Contact</NavLink></li>
                     </ul>
                     <div className="px-2 text-white text-decoration-none">Expenses <span className="badge bg-primary">{expensesList.length}</span></div>
 

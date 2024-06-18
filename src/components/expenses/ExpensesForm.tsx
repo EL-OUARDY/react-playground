@@ -97,7 +97,7 @@ function ExpensesForm() {
                     </div>
 
                     <input className="btn btn-primary" type="submit" value="Submit" />
-                    <input type="button" className="btn btn-secondary mx-2" value="Clear" onClick={resetForm} />
+                    { !id && <input type="button" className="btn btn-secondary mx-2" value="Clear" onClick={resetForm} />}
                 </form>
                 <div className="col-lg-6 col-sm-12 col-md-6 mb-3">
                     <div className="alert alert-success" role="alert">

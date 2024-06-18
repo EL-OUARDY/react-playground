@@ -9,4 +9,5 @@ export const ROUTES = {
     edit: "/expenses/:id/edit",
   },
   notFound: "/404",
+  shadcn: "/shadcn",
 };

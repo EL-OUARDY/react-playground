@@ -1,20 +1,29 @@
-import Header from '../components/Header'
-import { ExpenseProvider } from '../contexts/ExpenseContext'
-import { Outlet } from 'react-router-dom'
+import Header from "../components/Header";
+import { ExpenseProvider } from "../contexts/ExpenseContext";
+import { Outlet } from "react-router-dom";
 
 const Layout = () => {
-    return (
-        <div className="container-fluid">
-            <ExpenseProvider>
-                <Header />
-                <div className="container-fluid">
-                    <div className="row mt-4">
-                        <Outlet />
-                    </div>
-                </div>
-            </ExpenseProvider>
-        </div>
-    )
-}
+  return (
+    <>
+      {/* only render bootstrap for this layout
+      - silly way, but it's just a practice playground */}
+      <link
+        rel="stylesheet"
+        href="/node_modules/bootstrap/dist/css/bootstrap.min.css"
+      />
 
-export default Layout
+      <div className="container-fluid">
+        <ExpenseProvider>
+          <Header />
+          <div className="container-fluid">
+            <div className="row mt-4">
+              <Outlet />
+            </div>
+          </div>
+        </ExpenseProvider>
+      </div>
+    </>
+  );
+};
+
+export default Layout;
