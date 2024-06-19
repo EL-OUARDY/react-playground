@@ -1,10 +1,11 @@
-import { ThemeProvider } from "@/components/theme-provider";
+import { Layout } from "@/components/shadcn/Layout";
+import { ThemeProvider } from "@/components/shadcn/theme-provider";
 
 function Shadcn() {
   return (
     <>
       <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
-        <div></div>
+        <Layout></Layout>
       </ThemeProvider>
     </>
   );
